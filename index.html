@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RN-PLANEJADOS - Móveis Planejados de Qualidade</title>
+    <title>RN-PLANEJADOS - Projetos Arquitetônicos e Móveis Planejados</title>
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
@@ -24,6 +24,7 @@
             --accent-gray: #4a4a4a;
             --light-gray: #f5f5f5;
             --highlight: #d4af37;
+            --whatsapp: #25D366;
         }
 
         body {
@@ -112,6 +113,24 @@
             cursor: pointer;
         }
 
+        .admin-btn {
+            background-color: var(--highlight);
+            color: var(--primary-dark);
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+
+        .admin-btn:hover {
+            background-color: #e6c035;
+        }
+
         /* Hero Section */
         .hero {
             padding: 180px 0 100px;
@@ -154,7 +173,17 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
-        /* Galeria */
+        .whatsapp-btn {
+            background-color: var(--whatsapp);
+            margin-left: 15px;
+        }
+
+        /* Serviços */
+        .services {
+            padding: 100px 0;
+            background-color: rgba(45, 45, 45, 0.8);
+        }
+
         .section-title {
             text-align: center;
             margin-bottom: 50px;
@@ -173,6 +202,37 @@
             transform: translateX(-50%);
         }
 
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: rgba(58, 58, 58, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--highlight);
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            color: var(--highlight);
+            margin-bottom: 15px;
+        }
+
+        /* Galeria */
         .gallery {
             padding: 100px 0;
             background-color: rgba(26, 26, 26, 0.7);
@@ -308,6 +368,26 @@
             width: 20px;
         }
 
+        .whatsapp-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--whatsapp);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+
+        .whatsapp-link:hover {
+            background-color: #1da851;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
         .map {
             height: 400px;
             border-radius: 10px;
@@ -360,11 +440,132 @@
             color: var(--primary-dark);
         }
 
+        .whatsapp-icon {
+            background-color: var(--whatsapp) !important;
+        }
+
         .copyright {
             padding-top: 20px;
             border-top: 1px solid #444;
             color: #aaa;
             font-size: 0.9rem;
+        }
+
+        /* Modal Admin */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            display: none;
+        }
+
+        .modal {
+            background: linear-gradient(135deg, var(--primary-gray) 0%, var(--secondary-gray) 100%);
+            width: 90%;
+            max-width: 800px;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #555;
+        }
+
+        .modal-title {
+            color: var(--highlight);
+            font-size: 1.5rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--light-gray);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--highlight);
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .admin-panel {
+            display: none;
+        }
+
+        .requests-list {
+            display: grid;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .request-item {
+            background-color: rgba(26, 26, 26, 0.7);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--highlight);
+        }
+
+        .request-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .request-name {
+            font-weight: 600;
+            color: var(--highlight);
+        }
+
+        .request-date {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        .request-contact {
+            display: flex;
+            gap: 15px;
+            margin: 10px 0;
+        }
+
+        .request-contact span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .request-message {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #444;
+        }
+
+        .no-requests {
+            text-align: center;
+            padding: 30px;
+            color: #aaa;
         }
 
         /* Responsividade */
@@ -398,6 +599,11 @@
             .footer-content {
                 grid-template-columns: 1fr;
             }
+            
+            .admin-btn {
+                margin-left: 0;
+                margin-top: 10px;
+            }
         }
 
         @media (max-width: 576px) {
@@ -414,6 +620,10 @@
             }
             
             .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .services-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -433,10 +643,12 @@
             <nav id="mainNav">
                 <ul>
                     <li><a href="#inicio">Início</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
                     <li><a href="#galeria">Galeria</a></li>
                     <li><a href="#contato">Contato</a></li>
                     <li><a href="#localizacao">Localização</a></li>
                 </ul>
+                <button class="admin-btn" id="adminBtn">Área ADM</button>
             </nav>
         </div>
     </header>
@@ -444,9 +656,41 @@
     <!-- Hero Section -->
     <section class="hero" id="inicio">
         <div class="container">
-            <h2>Móveis Planejados que Transformam seu Espaço</h2>
-            <p>Na RN-PLANEJADOS, criamos móveis sob medida que combinam funcionalidade, design e qualidade. Transformamos sua casa ou escritório com soluções personalizadas para cada ambiente.</p>
+            <h2>Soluções Completas em Projetos e Móveis</h2>
+            <p>Da planta baixa ao mobiliário pronto, oferecemos soluções integradas em projetos arquitetônicos, estruturais e móveis planejados. Transformamos seus espaços com qualidade e precisão.</p>
             <a href="#contato" class="btn">Solicitar Orçamento</a>
+            <a href="https://wa.me/5511971951838?text=Olá! Gostaria de um orçamento para móveis planejados ou projeto arquitetônico." target="_blank" class="btn whatsapp-btn">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <!-- Serviços -->
+    <section class="services" id="servicos">
+        <div class="container">
+            <h2 class="section-title">Nossos Serviços</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-ruler-combined service-icon"></i>
+                    <h3>Móveis Planejados</h3>
+                    <p>Cozinhas, dormitórios, home offices e móveis sob medida para todos os ambientes, com design funcional e materiais de alta qualidade.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-drafting-compass service-icon"></i>
+                    <h3>Projeto Arquitetônico</h3>
+                    <p>Desenvolvimento completo de projetos arquitetônicos residenciais e comerciais, atendendo todas as normas técnicas e de conforto.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-layer-group service-icon"></i>
+                    <h3>Planta Baixa</h3>
+                    <p>Criação de plantas baixas detalhadas, layout de ambientes, distribuição de mobiliário e otimização de espaços.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-hard-hat service-icon"></i>
+                    <h3>Projeto Estrutural</h3>
+                    <p>Projetos estruturais para obras novas e reformas, com cálculos precisos e atendimento às normas de segurança.</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -476,8 +720,19 @@
                             <input type="email" id="email" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label for="phone">Telefone</label>
+                            <label for="phone">Telefone/WhatsApp</label>
                             <input type="tel" id="phone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Serviço de Interesse</label>
+                            <select id="service" class="form-control" required>
+                                <option value="">Selecione um serviço</option>
+                                <option value="moveis-planejados">Móveis Planejados</option>
+                                <option value="projeto-arquitetonico">Projeto Arquitetônico</option>
+                                <option value="planta-baixa">Planta Baixa</option>
+                                <option value="projeto-estrutural">Projeto Estrutural</option>
+                                <option value="todos">Todos os Serviços</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="project">Descreva seu Projeto</label>
@@ -490,27 +745,34 @@
                 
                 <div>
                     <h3>Por que escolher a RN-PLANEJADOS?</h3>
-                    <p style="margin-bottom: 20px;">Com mais de 10 anos de experiência no mercado, somos especialistas em criar móveis planejados que atendem às necessidades específicas de cada cliente. Trabalhamos com materiais de alta qualidade e acabamento impecável.</p>
+                    <p style="margin-bottom: 20px;">Somos uma empresa especializada em soluções completas para seu espaço. Combinamos expertise em arquitetura, engenharia e marcenaria para oferecer um serviço integrado e de alta qualidade.</p>
                     
-                    <h4>Nossos Serviços:</h4>
+                    <h4>Vantagens:</h4>
                     <ul style="list-style-type: none; margin-top: 15px;">
                         <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
                             <i class="fas fa-check" style="color: var(--highlight);"></i>
-                            <span>Cozinhas planejadas</span>
+                            <span>Atendimento personalizado</span>
                         </li>
                         <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
                             <i class="fas fa-check" style="color: var(--highlight);"></i>
-                            <span>Guarda-roupas e dormitórios</span>
+                            <span>Projetos 3D para visualização</span>
                         </li>
                         <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
                             <i class="fas fa-check" style="color: var(--highlight);"></i>
-                            <span>Home offices e bibliotecas</span>
+                            <span>Equipe especializada em cada área</span>
                         </li>
                         <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
                             <i class="fas fa-check" style="color: var(--highlight);"></i>
-                            <span>Móveis para áreas comerciais</span>
+                            <span>Garantia em todos os serviços</span>
                         </li>
                     </ul>
+                    
+                    <div style="margin-top: 30px; background-color: rgba(58, 58, 58, 0.9); padding: 20px; border-radius: 8px;">
+                        <h4 style="color: var(--highlight); margin-bottom: 15px;">Fale direto conosco:</h4>
+                        <a href="https://wa.me/5511971951838?text=Olá! Gostaria de um orçamento para móveis planejados ou projeto arquitetônico." target="_blank" class="whatsapp-link">
+                            <i class="fab fa-whatsapp"></i> WhatsApp: (11) 97195-1838
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -525,9 +787,13 @@
                     <h3>Venha nos visitar</h3>
                     <p><i class="fas fa-map-marker-alt"></i> AV. FLORESTAN FERNANDES 1239 - JD PONTE ALTA - GUARULHOS</p>
                     <p><i class="fas fa-mail-bulk"></i> CEP 07179-000</p>
-                    <p><i class="fas fa-phone"></i> (11) 3456-7890</p>
+                    <p><i class="fas fa-phone"></i> (11) 97195-1838</p>
                     <p><i class="fas fa-envelope"></i> contato@rnplanejados.com.br</p>
                     <p><i class="fas fa-clock"></i> Segunda a Sexta: 8h às 18h | Sábado: 9h às 13h</p>
+                    
+                    <a href="https://wa.me/5511971951838?text=Olá! Estou na região e gostaria de agendar uma visita." target="_blank" class="whatsapp-link" style="margin-top: 20px;">
+                        <i class="fab fa-whatsapp"></i> Agendar Visita pelo WhatsApp
+                    </a>
                 </div>
                 <div class="map">
                     <iframe 
@@ -550,15 +816,15 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>RN-PLANEJADOS</h3>
-                    <p>Especialistas em móveis planejados sob medida para residências e empresas. Qualidade, design e funcionalidade em cada projeto.</p>
+                    <p>Soluções completas em móveis planejados, projetos arquitetônicos, plantas baixas e projetos estruturais. Qualidade e compromisso em cada projeto.</p>
                 </div>
                 <div class="footer-section">
-                    <h3>Links Rápidos</h3>
+                    <h3>Serviços</h3>
                     <ul style="list-style-type: none;">
-                        <li style="margin-bottom: 8px;"><a href="#inicio" style="color: #ccc; text-decoration: none;">Início</a></li>
-                        <li style="margin-bottom: 8px;"><a href="#galeria" style="color: #ccc; text-decoration: none;">Galeria</a></li>
-                        <li style="margin-bottom: 8px;"><a href="#contato" style="color: #ccc; text-decoration: none;">Contato</a></li>
-                        <li style="margin-bottom: 8px;"><a href="#localizacao" style="color: #ccc; text-decoration: none;">Localização</a></li>
+                        <li style="margin-bottom: 8px;">• Móveis Planejados</li>
+                        <li style="margin-bottom: 8px;">• Projeto Arquitetônico</li>
+                        <li style="margin-bottom: 8px;">• Planta Baixa</li>
+                        <li style="margin-bottom: 8px;">• Projeto Estrutural</li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -566,9 +832,12 @@
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://wa.me/5511971951838" target="_blank" class="whatsapp-icon"><i class="fab fa-whatsapp"></i></a>
                         <a href="#"><i class="fab fa-pinterest"></i></a>
                     </div>
+                    <p style="margin-top: 20px; font-size: 1.2rem;">
+                        <i class="fab fa-whatsapp" style="color: var(--whatsapp);"></i> (11) 97195-1838
+                    </p>
                 </div>
             </div>
             <div class="copyright">
@@ -576,6 +845,33 @@
             </div>
         </div>
     </footer>
+
+    <!-- Modal de Admin -->
+    <div class="modal-overlay" id="adminModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Área Administrativa</h3>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            
+            <div id="loginForm" class="login-form">
+                <h4>Login Administrativo</h4>
+                <div class="form-group">
+                    <label for="adminPassword">Senha</label>
+                    <input type="password" id="adminPassword" class="form-control" placeholder="Digite a senha de administrador">
+                </div>
+                <button id="loginBtn" class="btn">Entrar</button>
+                <p style="color: #aaa; font-size: 0.9rem; margin-top: 10px;">Senha padrão: rnadmin2023</p>
+            </div>
+            
+            <div id="adminPanel" class="admin-panel">
+                <h4>Solicitações de Clientes</h4>
+                <div id="requestsList" class="requests-list">
+                    <!-- As solicitações serão carregadas aqui -->
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
         // Firebase configuration
@@ -612,12 +908,12 @@
                 title: "Home Office Elegante"
             },
             {
-                url: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-                title: "Quarto Infantil Personalizado"
+                url: "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80",
+                title: "Projeto Arquitetônico"
             },
             {
-                url: "https://images.unsplash.com/photo-1583845112205-5c61b5d27c1f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80",
-                title: "Biblioteca de Madeira Maciça"
+                url: "https://images.unsplash.com/photo-1576941089067-2de3c901442f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1476&q=80",
+                title: "Planta Baixa Detalhada"
             }
         ];
 
@@ -643,6 +939,7 @@
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const phone = document.getElementById('phone').value;
+            const service = document.getElementById('service').value;
             const project = document.getElementById('project').value;
             
             // Obter data e hora atual
@@ -655,6 +952,7 @@
                 nome: name,
                 email: email,
                 telefone: phone,
+                servico: service,
                 projeto: project,
                 data: dateString,
                 hora: timeString,
@@ -700,6 +998,126 @@
                 }
             });
         });
+
+        // Área Administrativa
+        const adminModal = document.getElementById('adminModal');
+        const adminBtn = document.getElementById('adminBtn');
+        const closeModal = document.getElementById('closeModal');
+        const loginBtn = document.getElementById('loginBtn');
+        const adminPanel = document.getElementById('adminPanel');
+        const loginForm = document.getElementById('loginForm');
+
+        // Abrir modal de admin
+        adminBtn.addEventListener('click', function() {
+            adminModal.style.display = 'flex';
+        });
+
+        // Fechar modal de admin
+        closeModal.addEventListener('click', function() {
+            adminModal.style.display = 'none';
+            // Resetar para mostrar o formulário de login
+            adminPanel.style.display = 'none';
+            loginForm.style.display = 'flex';
+            document.getElementById('adminPassword').value = '';
+        });
+
+        // Fechar modal ao clicar fora
+        adminModal.addEventListener('click', function(e) {
+            if (e.target === adminModal) {
+                adminModal.style.display = 'none';
+                // Resetar para mostrar o formulário de login
+                adminPanel.style.display = 'none';
+                loginForm.style.display = 'flex';
+                document.getElementById('adminPassword').value = '';
+            }
+        });
+
+        // Login admin
+        loginBtn.addEventListener('click', function() {
+            const password = document.getElementById('adminPassword').value;
+            // Senha padrão (pode ser alterada)
+            const correctPassword = "rnadmin2023";
+            
+            if (password === correctPassword) {
+                // Mostrar painel admin
+                loginForm.style.display = 'none';
+                adminPanel.style.display = 'block';
+                
+                // Carregar solicitações
+                loadRequests();
+            } else {
+                alert("Senha incorreta. Tente novamente.");
+                document.getElementById('adminPassword').value = '';
+                document.getElementById('adminPassword').focus();
+            }
+        });
+
+        // Carregar solicitações do Firebase
+        function loadRequests() {
+            const requestsList = document.getElementById('requestsList');
+            requestsList.innerHTML = '<div class="no-requests">Carregando solicitações...</div>';
+            
+            db.collection("clientes")
+                .orderBy("timestamp", "desc")
+                .get()
+                .then((querySnapshot) => {
+                    if (querySnapshot.empty) {
+                        requestsList.innerHTML = '<div class="no-requests">Nenhuma solicitação encontrada.</div>';
+                        return;
+                    }
+                    
+                    requestsList.innerHTML = '';
+                    
+                    querySnapshot.forEach((doc) => {
+                        const data = doc.data();
+                        const requestItem = document.createElement('div');
+                        requestItem.className = 'request-item';
+                        
+                        // Formatar nome do serviço
+                        let servicoTexto = "";
+                        switch(data.servico) {
+                            case "moveis-planejados":
+                                servicoTexto = "Móveis Planejados";
+                                break;
+                            case "projeto-arquitetonico":
+                                servicoTexto = "Projeto Arquitetônico";
+                                break;
+                            case "planta-baixa":
+                                servicoTexto = "Planta Baixa";
+                                break;
+                            case "projeto-estrutural":
+                                servicoTexto = "Projeto Estrutural";
+                                break;
+                            case "todos":
+                                servicoTexto = "Todos os Serviços";
+                                break;
+                            default:
+                                servicoTexto = data.servico || "Não especificado";
+                        }
+                        
+                        requestItem.innerHTML = `
+                            <div class="request-header">
+                                <div class="request-name">${data.nome}</div>
+                                <div class="request-date">${data.data} às ${data.hora}</div>
+                            </div>
+                            <div class="request-contact">
+                                <span><i class="fas fa-envelope"></i> ${data.email}</span>
+                                <span><i class="fas fa-phone"></i> ${data.telefone}</span>
+                            </div>
+                            <div><strong>Serviço:</strong> ${servicoTexto}</div>
+                            <div class="request-message">
+                                <strong>Projeto:</strong> ${data.projeto}
+                            </div>
+                        `;
+                        
+                        requestsList.appendChild(requestItem);
+                    });
+                })
+                .catch((error) => {
+                    console.error("Erro ao carregar solicitações: ", error);
+                    requestsList.innerHTML = '<div class="no-requests">Erro ao carregar solicitações.</div>';
+                });
+        }
 
         // Carregar a galeria quando a página carregar
         document.addEventListener('DOMContentLoaded', function() {
